@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default visible-xs" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">{_"Zobrazit navigaci"}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <h1 class="navbar-logo"><a href="/" rel="home"><img src="/public/images/logo.png" alt="logo" width="124" height="124" class="img-responsive"/></a></h1>
+    </div>
+    <div class="collapse navbar-right navbar-collapse">
+        {block menu}
+        {default $level = 0}
+        <ul n:class="nav, $level>0 ? navbar-subnav : navbar-nav">
+            <li n:foreach="$menu as $item" n:class="$level>0 ? 'navbar-subnav-item' : navbar-nav-item">
+               {var $aClass = \count($item->children)>0 ? 'is-parent' : ''}
+               {includeblock 'li-inner.latte'}
+                {if \count($item->children)>0}
+                    {include menu 'menu' => $item['children'], level => $level + 1}
+                {/if}
+            </li>
+        </ul>
+        {/block}
+    </div>
+</nav>

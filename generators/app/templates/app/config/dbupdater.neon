@@ -1,0 +1,5 @@
+extensions:
+	dbupdater: Esports\DBUpdater\DBUpdaterExtension
+
+dbupdater:
+	path: '%appDir%/../db/scripts'

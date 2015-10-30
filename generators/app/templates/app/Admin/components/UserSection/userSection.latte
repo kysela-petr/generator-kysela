@@ -1,0 +1,4 @@
+{var $userSections = $userData->fetchPairs('id','id')}
+<ul id="sections" n:inner-foreach="$data as $section">
+    <li n:class="isset($userSections[$section->id]) ? enable" title="{$section->name}">{$section->module|upper}</li>
+</ul>

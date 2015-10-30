@@ -1,0 +1,9 @@
+{block li}
+{if $template->isMenuItemLink($item['type'])}
+    <a href="{$item['link']->getUrl()}">{$item['name']}</a>
+{elseif $template->isHeading($item['type'])}
+    <a>{$item['name']}</a>
+{else}
+    {$item['html']|noescape}
+{/if}
+{/block}

@@ -1,0 +1,11 @@
+parameters:
+	menuAliases: []
+
+	minimalize:
+		script: '/min.php'
+		cache:
+			remote: '%wwwDir%/cache/remote'
+
+	### Default ###
+	defaults:
+		emailFrom: 'admin@localhost'##Odesílatel emailu zapomenuté heslo do adminu

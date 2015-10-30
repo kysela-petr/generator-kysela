@@ -1,0 +1,6 @@
+parameters:
+	db:
+		host: localhost
+		name: 
+		user: 
+		password:

@@ -1,0 +1,182 @@
+body, td, pre {color:#333; font: 16px/1.6 Arial, Helvetica, sans-serif; margin:8px;}
+body {background:#FFF;}
+body.mceForceColors {background:#FFF; color:#000;}
+body.mceBrowserDefaults {background:transparent; color:inherit; font-size:inherit; font-family:inherit;}
+
+h1,h2,h3,h4,h5,h6
+{
+	color: #000000;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+h1
+{
+	font-size: 26px;
+	margin-bottom: 15px;
+}
+h2
+{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+h3
+{
+	font-size: 17px;
+	margin-bottom: 10px;
+}
+h4
+{
+	font-size: 16px;
+	margin-bottom: 10px;
+	font-style: italic;
+}
+h5
+{
+	font-size: 15px;
+	margin-bottom: 10px;
+	font-style: italic;
+	line-height: 15px;
+}
+h6
+{
+	font-size: 14px;
+	margin-bottom: 10px;
+	font-style: italic;
+}
+
+
+.mceItemTable, .mceItemTable td, .mceItemTable th, .mceItemTable caption, .mceItemVisualAid {border: 1px dashed #BBB;}
+a.mceItemAnchor {display:inline-block; -webkit-user-select:all; -webkit-user-modify:read-only; -moz-user-select:all; -moz-user-modify:read-only; width:11px !important; height:11px !important; background:url(img/items.gif) no-repeat center center}
+span.mceItemNbsp {background: #DDD}
+td.mceSelected, th.mceSelected {background-color:#3399ff !important}
+img {border:0;}
+table, img, hr, .mceItemAnchor {cursor:default}
+table td, table th {cursor:text}
+ins {border-bottom:1px solid green; text-decoration: none; color:green}
+del {color:red; text-decoration:line-through}
+cite {border-bottom:1px dashed blue}
+acronym {border-bottom:1px dotted #CCC; cursor:help}
+abbr {border-bottom:1px dashed #CCC; cursor:help}
+
+/* IE */
+* html body {
+	scrollbar-3dlight-color:#F0F0EE;
+	scrollbar-arrow-color:#676662;
+	scrollbar-base-color:#F0F0EE;
+	scrollbar-darkshadow-color:#DDD;
+	scrollbar-face-color:#E0E0DD;
+	scrollbar-highlight-color:#F0F0EE;
+	scrollbar-shadow-color:#F0F0EE;
+	scrollbar-track-color:#F5F5F5;
+}
+
+img:-moz-broken {-moz-force-broken-image-icon:1; width:24px; height:24px}
+font[face=mceinline] {font-family:inherit !important}
+*[contentEditable]:focus {outline:0}
+
+.mceItemMedia {border:1px dotted #cc0000; background-position:center; background-repeat:no-repeat; background-color:#ffffcc}
+.mceItemShockWave {background-image:url(../../img/shockwave.gif)}
+.mceItemFlash {background-image:url(../../img/flash.gif)}
+.mceItemQuickTime {background-image:url(../../img/quicktime.gif)}
+.mceItemWindowsMedia {background-image:url(../../img/windowsmedia.gif)}
+.mceItemRealMedia {background-image:url(../../img/realmedia.gif)}
+.mceItemVideo {background-image:url(../../img/video.gif)}
+.mceItemAudio {background-image:url(../../img/video.gif)}
+.mceItemEmbeddedAudio {background-image:url(../../img/video.gif)}
+.mceItemIframe {background-image:url(../../img/iframe.gif)}
+.mcePageBreak {display:block;border:0;width:100%;height:12px;border-top:1px dotted #ccc;margin-top:15px;background:#fff url(../../img/pagebreak.gif) no-repeat center top;}
+
+/*------- ADMINBOX -------*/
+.fl {float: left;}
+.fr {float: right;}
+.fn {float: none;}
+
+pre /* editovat i na frontendu */
+{
+	font-family: monospace;
+	font-size: 13px;
+	margin: 8px;
+	line-height: 19px;
+}
+
+.mce-image.fl
+{
+	margin-right: 20px;
+}
+.mce-image.fr
+{
+	margin-left: 20px;
+}
+
+
+.mce-gallery
+{
+	border: 1px dashed #888888;
+	display: block;
+	background-color: #D0D0D0;
+	background-image: url("/admin/images/gallery.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 200px;
+	width: 583px;
+}
+
+
+/*
+ * jQuery Spellchecker - v0.2.4
+ * https://github.com/badsyntax/jquery-spellchecker
+ *
+ * Copyright (c) 2012 Richard Willis
+ * Licensed under the MIT license.
+ */
+.spellchecker-suggestbox {
+	position: absolute;
+	display: none;
+	z-index: 9999;
+	overflow: none;
+	font: normal 13px arial;
+	box-shadow: 0 0 4px #aaa;
+	background: #fff;
+	border: 1px solid #bbb;
+}
+.spellchecker-suggestbox .loading {
+	padding: 3px 6px;
+	font-style: italic;
+}
+.spellchecker-suggestbox a {
+	outline: none;
+	cursor: pointer;
+	color: #333;
+	padding: 3px 6px;
+	display: block;
+	text-decoration: none;
+}
+.spellchecker-suggestbox a:hover {
+	color: #000;
+	background: #ddd;
+}
+.spellchecker-suggestbox .footer {
+	border-top: 1px solid #ddd;
+}
+.spellchecker-suggestbox .footer .ignore-all,
+.spellchecker-suggestbox .footer .ignore-forever {
+	display: none;
+}
+.spellchecker-word-highlight {
+	color: red;
+	cursor: pointer;
+	border-bottom: 1px dotted red;
+}
+.spellchecker-incorrectwords {
+	display: none;
+}
+.spellchecker-incorrectwords a {
+	display: inline-block;
+	margin-right: .5em;
+}
+.spellchecker-button-icon {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHtSURBVDjLY/j//z8DJZiBKgY49drM9J3idhLEtu+xjvea4nLNqsVspnWr2S6QmF6+Zol2ltpq5QSlmcpxijMxDABp9pjkuMuu28rIpsMi3rLZFKzIus38mm6OuqRxpf41nC5w7rOJd+i1ngnUXGLTbj7Tsskk3rbL8ppZreEu7Ry1mWpJSvHK8Uoz0TWK5U/nYIg8y8rgPsl+l12P1WqgbTPdJtk/AtoWb1CkBdagnqyyWilawVM/Rw/FBQyx540ZGm/eYIg8P43BdYLdSZiEcYXeTJB/TaoNroH8q5OldVIhXE5SKUqhXSNRfZdKvPKVkOrED+L9d/8wN998w+B4XIL40I48K8FQf/O6+7In/7mbb35hsD2qjBKNDLU3ExjKb7pi1Rx61ke89+6fwBVP/jPXXn/HYHlYGiMdMJTe1JJc/PgHQ/X1xQyplznBYuFnmRiiz062nPfof8DSJ/8ZSq8/ZzA9KIEzIQE1Vvuuf/6fufv2M4bgsz4MxVdPui8Cal4C1Jx/+RGDPqpmTANiz7MAvXI+bO2L/5ZzHvzP2Pjif8DCx/8ZMi/fY9DcL0FUUmbwPKkg3Hr7T+WOV//95j/8z5B6/jaD6l4JkvIC0J9FTtPu/2dIPn+PQXG3BFmZiUFzbweDLH7NVMmNAOGld33BRiNUAAAAAElFTkSuQmCC) !important;
+	background-repeat: no-repeat;
+	background-position: center center;
+}

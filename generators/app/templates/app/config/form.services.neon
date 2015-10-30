@@ -1,0 +1,75 @@
+services:
+
+	### FRONT ####
+	- App\Component\FormFactory
+
+	### Login ###
+	adminSignForm < component:
+		implement: Admin\Login\ISignFormFactory
+
+	adminLostForm < component:
+		implement: Admin\Login\ILostPasswordFormFactory
+		setup:
+			- setFrom(%defaults.emailFrom%)
+	adminrenewPasswordForm < component:
+		implement: Admin\Login\IRenewPasswordFormFactory
+		parameters: [email,token]
+		arguments: [%email%,%token%]
+
+	### Section ###
+	sectionForm < component:
+		implement: Admin\Content\ISectionFormFactory
+
+	### Menu ###
+	menuForm < component:
+		implement: Admin\Content\IMenuFormFactory
+		parameters: [sectionId]
+		arguments: [%sectionId%, @menuLazyItemMap]
+
+	### User ###
+	userForm < component:
+		implement: Admin\User\IUserFormFactory
+
+	roleForm < component:
+		implement: Admin\User\IRoleFormFactory
+
+	roleSettingsForm < component:
+		implement: Admin\User\IRoleSettingsFormFactory
+		parameters: [id]
+		arguments: [%id%]
+
+	### Article ###
+	pageForm < component:
+		implement: Admin\Article\IPageFormFactory
+		parameters: [sectionId]
+		arguments: [%sectionId%]
+
+
+	# Form item factory
+	- Admin\MenuFormItemFactory
+	- Admin\ModuleFormItemFactory
+	- Admin\RoleFormItemFactory
+	- Admin\RoleResourceFormItemFactory
+	- Admin\RoleActionFormItemFactory
+	- Admin\PresenterOptionFactory
+	- Admin\SectionFormItemFactory
+	- Admin\PageFormItemFactory
+
+	- Admin\Content\MenuItemDataSource
+
+	# Form option factory
+	- Admin\MenuTypeOptionFactory
+	- Admin\SubmoduleOptionFactory
+	- Admin\SectionOptionFactory
+
+	menuLazyItemMap:
+		class: Admin\LazyItemMap
+		autowired: no
+		setup:
+			- add(Model\MenuTypeConst::URL, Admin\Content\MenuUrlLazyItem())
+			- add(Model\MenuTypeConst::SECTION, Admin\Content\MenuSectionLazyItem())
+			- add(Model\MenuTypeConst::HTML, Admin\Content\MenuHtmlLazyItem())
+			- add(Model\MenuTypeConst::SYMLINK, Admin\Content\MenuSymlinkLazyItem())
+			- add(Model\MenuTypeConst::HEADING, Admin\Content\MenuEmptyLazyItem())
+			- add(Model\MenuTypeConst::PRESENTER, Admin\Content\MenuPresenterLazyItem())
+			- add(Model\MenuTypeConst::PAGE, Admin\Content\MenuPageLazyItem())

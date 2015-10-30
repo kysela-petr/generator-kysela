@@ -1,0 +1,15 @@
+<div id="loginbox">
+	{form form}
+		<p>{_'Zadejte login a heslo pro přihlášení.'}</p>
+		<div class="input-group input-sm">
+			<span class="input-group-addon"><i class="fa fa-user"></i></span>{input login class => "form-control", id => "username"}
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon"><i class="fa fa-lock"></i></span>{input password class => "form-control", id => "password"}
+		</div>
+		<div class="form-actions clearfix">
+			{input makeLogin class => "btn btn-block btn-primary"}
+            <a href="{plink Sign:lost}" class = "btn btn-block btn-primary">{_"Zapomenuté heslo"}</a>
+		</div>
+	{/form}
+</div>

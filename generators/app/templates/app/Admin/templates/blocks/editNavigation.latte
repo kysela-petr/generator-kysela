@@ -1,0 +1,17 @@
+{*
+ * @param string $current
+ * @param array $items
+ * @param int $entityId
+ *}
+{define #editNavigation}
+
+	<div class="widget-title">
+		<ul class="nav nav-tabs">
+			{foreach $items as $action => $title}
+				<li n:class="$current == $action ? active">
+					<a n:href="$action id => $entityId">{_$title}</a>
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+{/define}

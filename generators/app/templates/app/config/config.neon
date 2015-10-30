@@ -1,0 +1,19 @@
+includes:
+	- bakery.neon
+	- parameters.neon
+	- php.neon
+	- nette.neon
+
+	# SERVICES
+	- services.neon
+	- provider.services.neon
+	- admin.services.neon
+	- grid.services.neon
+	- model.services.neon
+	- form.services.neon
+	- widget.services.neon
+	- dbupdater.neon
+
+	# EXTENSIONS
+	- extensions.neon
+	- privileges.extensions.neon

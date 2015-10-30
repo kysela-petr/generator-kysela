@@ -1,0 +1,27 @@
+extensions:
+	- Esports\Forms\FormsExtension
+	- Esports\Database\ExceptionTranslatorExtension
+	- Esports\Grido\GridoEditableExtension
+	webloader: WebLoader\Nette\Extension
+
+webloader:
+	css:
+		front:
+			files: 
+				- '%wwwDir%/dist/style/main.css'
+			tempDir: '%wwwDir%/webtemp'
+			tempPath: 'webtemp'
+		admin:
+			tempDir: '%wwwDir%/adminwww/webtemp'
+			tempPath: 'adminwww/webtemp'
+		upload:
+	js:
+		front:
+			files: 
+				- '%wwwDir%/dist/js/vendors.js'
+				- '%wwwDir%/dist/js/main.js'
+			tempDir: '%wwwDir%/webtemp'
+			tempPath: 'webtemp'
+		admin:
+			tempDir: '%wwwDir%/adminwww/webtemp'
+			tempPath: 'adminwww/webtemp'

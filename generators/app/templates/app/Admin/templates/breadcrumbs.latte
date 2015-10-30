@@ -1,0 +1,8 @@
+<div id="breadcrumb">
+	{foreach $items as $item}
+		<a href="{$iterator->isLast() ? '' : $item->url}" n:class="$iterator->isLast() ? current">
+			<i class="fa fa-home" n:if="$iterator->isFirst()"></i>
+			{$item->label}
+		</a>
+	{/foreach}
+</div>

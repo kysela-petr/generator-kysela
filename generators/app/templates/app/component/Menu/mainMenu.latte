@@ -1,0 +1,19 @@
+<div class="row hidden-xs">
+	<div class="col-sm-12">
+		<nav n:if="\count($menu)" class="menu">
+		{block menu}
+		{default $level = 0}
+		<ul n:inner-foreach="$menu as $item" n:class="($level === 0) ? group : submenu">
+			{var $isCurrentMenu = (isset($currentPosition[$level]) && $currentPosition[$level] == $item->id) ? TRUE : FALSE }
+			{var $class = ($level === 0) ? 'menu-item' : 'submenu-item'}
+			<li n:class="$class, $isCurrentMenu ? current-menu-item">
+				{includeblock 'li-inner.latte'}
+				{if sizeof($item->children)>0}
+					{include menu 'menu' => $item['children'], level => $level + 1}
+				{/if}
+			</li>
+		</ul>
+		{/block}
+		</nav>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Author" content="eSports s.r.o." />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="-1" />
+		<meta name="resource-type" content="document" />
+		<meta name="rating" content="general" />
+		<meta name="distribution" content="global" />
+		<meta name="robots" content="{$robots}" n:ifset="$robots">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title>{include #title|striptags|trim} - Admin</title>
+		<link rel="shortcut icon" href="/favicon.png">
+		<script>document.documentElement.className += ' js';</script>
+		{block #css}{/block}
+		{control cssAdmin
+			'adminwww/css/bootstrap.min.css',
+			'adminwww/css/font-awesome.min.css',
+			'adminwww/css/colorpicker.css',
+			'adminwww/css/jquery.jscrollpane.css',
+			'adminwww/css/jquery.gritter.css',
+			'adminwww/css/jquery-ui.css',
+			'adminwww/css/jquery.ui.ie.css',
+			'adminwww/css/jquery.multipleselect.css',
+			'adminwww/css/datetimepicker.css',
+			'adminwww/css/select2.css',
+			'adminwww/css/unicorn.css',
+			'adminwww/css/typeahead.css',
+			'adminwww/css/nprogress.css',
+			'adminwww/css/grido.css',
+			'adminwww/css/admin.css'
+		}
+		<!--[if lt IE 8]>
+			<link rel="stylesheet" type="text/css" href="/adminwww/css/unicorn.ie7">
+		<![endif]-->
+		<!--[if lt IE 9]>
+			<script type="text/javascript" src="adminwww/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body data-color="grey" class="flat">
+		<div id="wrapper">
+			<div id="header">
+				<h1><a n:href=":Admin:Dashboard:Homepage:default">Admin</a></h1>
+                {control userSectionView}
+			</div>
+			<div id="user-nav">
+	            <ul class="btn-group">
+	                <li class="btn"><a title="{_'Odhlášení'}" class="tip-bottom" n:href=":Admin:Login:Sign:logout"><i class="fa fa-share"></i> <span class="text">{$user->identity->name} {$user->identity->surname} - {_'Odhlášení'}</span></a></li>
+	            </ul>
+	        </div>
+			<div id="sidebar">
+				{control mainMenu}
+			</div>
+			<div id="content">
+				<div id="content-header" class="mini">
+					{define #titleNavigation}{$presenter['navigation']->currentNode->label}{/define}
+					<h1>{block #title}{include #titleNavigation}{/block}</h1>
+				</div>
+				{control navigation:breadcrumbs}
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							{snippet flashes}
+								<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+									{$flash->message}<a href="#" data-dismiss="alert" class="close">×</a>
+								</div>
+							{/snippet}
+							{include #content}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div id="footer" class="col-xs-12">
+					technická podpora: <a href="mailto:podpora@esports.cz">podpora@esports.cz</a>
+				</div>
+			</div>
+			<div>&nbsp;</div>
+		</div>
+		{block #modal}{/block}
+		{control jsAdmin
+			'adminwww/js/js.min.js',
+			'adminwww/js/shame.js'
+		}
+		{block #tinyMCE}
+			{include 'tinyMCE.latte'}
+		{/block}
+		{block #js}{/block}
+		<div id="editorZoom" style="display: none; width: 440px; height: 460px; position: absolute; left: 0; top: 0; border: 1px solid #aaa; border-radius: 4px; background: #fff; z-index: 10000;">
+			<span id="editorZoomText" style="font-weight: bold; position: absolute; top: 4px; left: 20px; color: #000;"></span>
+			<img id="editorZoomImg" src="" style="max-width: 400px; max-height: 400px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;" />
+		</div>
+	</body>
+</html>

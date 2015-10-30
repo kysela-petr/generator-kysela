@@ -1,0 +1,19 @@
+<ul>
+	{block #menu}
+	{default $level = 0}
+	<li n:foreach="$children as $item" n:class="count($item->getComponents()) ? submenu, open, $item->hasActive() ? active">
+		{var hasChildren = count($item->getComponents()) > 0}
+		<a href="{plink $item->url (expand)$item->params}">
+			{if $item->getOption('icon')}
+				<i class="fa fa-{$item->getOption('icon')}"></i>
+			{/if}
+			<span>{$item->label}</span>
+		</a>
+		{if $hasChildren}
+			<ul>
+				{include #menu, children => $item->getComponents(), level => $level + 1}
+			</ul>
+		{/if}
+	</li>
+	{/block}
+</ul>

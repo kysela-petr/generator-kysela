@@ -1,0 +1,102 @@
+services:
+	### Routers ###
+	- App\Router\AdminRouterFactory
+	- App\Router\FrontRouterFactory
+	- App\Router\RouterFactory
+	router: @App\Router\RouterFactory::createRouter(%consoleMode%)
+	databaseExceptionTranslator: Esports\Database\ExceptionTranslator
+
+	db:
+		create: @Nette\Database\Context
+		setup:
+			- @databaseExceptionTranslator::connect(@Nette\Database\Connection)
+
+	- Esports\RelatedTable\RTFactory(@db)
+
+
+	### Translator ###
+	- Admin\Translator
+
+	### Authorizator ###
+	- Model\IPermissionFactory
+	- Model\ISuperRoleFactory
+	adminAuthenticator:
+		class: Admin\Authenticator
+		autowired: no
+		inject: no
+
+	### Bakery ###
+	- Esports\Bakery\BakeryFactory(%bakery%)
+
+	### Helper ###
+	- Esports\Helper\PasswordHasher
+	- Esports\Helper\PasswordVerifier
+	- App\Helper\Role
+	minimalizeHelper: App\Helper\Minimalize(%minimalize.script%)
+
+
+	helperLoader:
+		class: Esports\Helper\Loader
+		setup:
+			- register(@minimalizeHelper)
+
+
+	### Component ###
+	component:
+		implement: App\Component\IStandardComponentFactory
+		setup:
+			- setTranslator()
+			- setHelperLoader()
+
+	adminMainMenu < component:
+		implement: Admin\IMainMenuFactory
+
+	sectionFilter < component:
+		implement: Admin\ISectionFilterFactory
+
+	userSectionView < component:
+		implement: Admin\IUserSectionViewFactory
+
+
+	### Utils ###
+	- Admin\MenuOrderer
+	- Admin\MenuTreeFactory
+	- Admin\MenuMoverFactory
+	- Admin\MenuTreeMoverFactory
+	- Admin\TreeFormItemCreator
+	- Admin\IUserSectionFactory
+	- Admin\UserSectionChecker
+	- Admin\Utils\ISectionDetectorFactory
+	- Esports\Utils\PresenterBridge
+	- Admin\Utils\UserSetuper('Admin', @Model\Authorizator, @adminAuthenticator)
+
+	### Email ###
+	- App\Utils\AppMailer(@nette.mailer)
+	- App\Utils\MailFactory
+
+	### Menu ###
+	- App\Helper\MenuItem
+	- App\MenuTreeFactory
+	- App\MenuItemDataSource
+	menuLinkComparator:
+		class: App\MenuLinkComparator
+		setup:
+			- setAliases(%menuAliases%)
+
+	presenterLinkSettingsFactory:
+		implement: App\IPresenterLinkSettingsFactory
+		parameters: [destination, params]
+		arguments: [%destination%, %params%]
+
+	menuLinkMap:
+		class: App\MenuLinkMap
+		setup:
+			- add(Model\MenuTypeConst::URL, App\MenuUrlLink())
+			- add(Model\MenuTypeConst::SECTION, App\MenuSectionLink())
+			- add(Model\MenuTypeConst::PAGE, App\MenuPageLink())
+			- add(Model\MenuTypeConst::SYMLINK, App\MenuSymlinkLink())
+			- add(Model\MenuTypeConst::PRESENTER, App\MenuPresenterLink())
+			- add(Model\MenuTypeConst::SUBJECT, App\MenuSubjectLink())
+
+	### orderer ###
+	- Admin\SectionOrderer

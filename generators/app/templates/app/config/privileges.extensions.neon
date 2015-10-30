@@ -1,0 +1,18 @@
+extensions:
+	privileges: Esports\Privileges\PrivilegesExtension
+
+privileges:
+	rights:
+		"*:*" : "*:*"
+
+	privileges:
+		"default,delete" : "edit"
+		"default,submit" : "view"
+		"default,*" : "view"
+		"*,submit" : "edit"
+		"*,*" : "edit"
+
+	signal:
+		"grid-form,submit" : "filter"
+		"*-grid-form,submit" : "filter"
+		"*,*" : "edit"

@@ -1,0 +1,10 @@
+{var $padding = $item['level'] * 20}
+<span style="display: block; padding-left: {$padding}px;">
+	<a href="{plink edit id => $item['id']}">{$item['name']}</a><br/>
+	<span style="visibility: hidden;" class="pageMoveIconsWrapper">
+		<a href="{$linkCallback('pageMoveLeft!', $item['id'])}"><i class="fa fa-arrow-circle-left"></i></a>
+		<a href="{$linkCallback('pageMoveRight!', $item['id'])}"><i class="fa fa-arrow-circle-right"></i></a>
+		<a href="{$linkCallback('pageMoveUp!', $item['id'])}"><i class="fa fa-arrow-circle-up"></i></a>
+		<a href="{$linkCallback('pageMoveDown!', $item['id'])}"><i class="fa fa-arrow-circle-down"></i></a>
+	</span>
+</span>

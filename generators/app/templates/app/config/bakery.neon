@@ -1,0 +1,41 @@
+parameters:
+	bakery: [
+		'Admin:Content:Menu': [
+			'name': 'Menu sekce',
+			'edit': 'Editace položky menu',
+			'add': 'Nová položka menu'
+		],
+		'Admin:Content:Module': [
+			'name': 'Moduly'
+		],
+		'Admin:Content:Presenter': [
+			'name': 'Presentery'
+		],
+		'Admin:Content:MenuType': [
+			'name': 'Typ položky menu'
+		],
+		'Admin:Settings:DBUpdater': [
+			'name': 'Verzování DB'
+		],
+		'Admin:Content:Section': [
+			'name': 'Sekce',
+			'edit': 'Editace sekce',
+			'add': 'Nová sekce'
+		],
+		'Admin:User:User': [
+			'name': 'Uživatelé',
+			'edit': 'Editace uživatele',
+			'add': 'Nový uživatel'
+		],
+		'Admin:User:Role': [
+			'name': 'Role',
+			'edit': 'Editace role',
+			'add': 'Nová role',
+			'settings': 'Nastavení zdrojů a akcí',
+		],
+		'Admin:Article:Page': [
+			'name': 'Statické texty',
+			'edit': 'Editace textu',
+			'add': 'Nový statický text'
+		],
+	]

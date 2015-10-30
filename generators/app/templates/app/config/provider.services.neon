@@ -1,0 +1,4 @@
+services:
+	### ADMIN ####
+	-
+		implement: Admin\IUserSectionProviderFactory

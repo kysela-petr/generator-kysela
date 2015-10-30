@@ -1,0 +1,18 @@
+nette:
+	application:
+		errorPresenter: "Error"
+		mapping:
+			Admin: Admin\*\*Presenter
+			Console: Console\*Presenter
+			*: *\*Presenter
+	database:
+		dsn: 'mysql:host=%db.host%;dbname=%db.name%'
+		user: %db.user%
+		password: %db.password%
+		options:
+			lazy: yes
+
+	session:
+		autoStart: true
+		expiration: 14 days
+		cookiePath: '/'

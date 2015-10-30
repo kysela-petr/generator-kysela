@@ -1,0 +1,14 @@
+{includeblock editNavigation.latte}
+<div class="widget-box">
+	<div class="widget-title">
+		<span class="icon">
+			<i class="fa fa-user"></i>
+		</span>
+	</div>
+
+	{include #editNavigation current => 'manager'}
+	<div class="widget-content">
+		{control managerForm}
+		{control managerGrid}
+	</div>
+</div>

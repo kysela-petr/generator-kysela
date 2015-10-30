@@ -1,0 +1,14 @@
+{define #cssJs}
+{block #css}
+	{control cssAdmin}
+	{control cssAdminUpload
+	        'adminwww/css/uploader/blueimp-gallery.min.css',
+            'adminwww/css/uploader/jquery.fileupload.css',
+            'adminwww/css/uploader/jquery.fileupload-ui.css'
+	}
+{/block}
+
+{block #js}
+	{control jsAdmin 'adminwww/js/uploader/js.min.js'}
+{/block}
+{/define}

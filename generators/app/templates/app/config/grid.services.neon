@@ -1,0 +1,42 @@
+services:
+	grid < component:
+		implement: App\Component\IStandardGridFactory
+		setup:
+			- setHelpers()
+			- setSectionFilter(@Model\SectionFilter)
+
+	- Admin\GridHelpers
+	moduleGrid < grid:
+		implement: Admin\Content\IModuleGridFactory
+
+	menuTypeGrid < grid:
+		implement: Admin\Content\IMenuTypeGridFactory
+
+	submoduleGrid < grid:
+		implement: Admin\Content\ISubmoduleGridFactory
+
+	presenterGrid < grid:
+		implement: Admin\Content\IPresenterGridFactory
+
+	sectionGrid < grid:
+		implement: Admin\Content\ISectionGridFactory
+
+	menuGrid < grid:
+		implement: Admin\Content\IMenuGridFactory
+		parameters: [sectionId]
+		arguments: [%sectionId%]
+
+	userGrid < grid:
+		implement: Admin\User\IUserGridFactory
+
+	roleGrid < grid:
+		implement: Admin\User\IRoleGridFactory
+
+	roleSettingsGrid < grid:
+		implement: Admin\User\IRoleSettingsGridFactory
+		parameters: [id]
+		arguments: [%id%]
+
+	### Article ###
+	pageGrid < grid:
+		implement: Admin\Article\IPageGridFactory

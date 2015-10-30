@@ -1,0 +1,14 @@
+{block #content}
+{includeblock '../blocks/editNavigation.latte'}
+<div class="widget-box">
+
+	<div class="widget-title">
+		<span class="icon">
+			<i class="fa fa-institution"></i>
+		</span>
+	</div>
+
+	{include #editNavigation current => 'role'}
+	{block subjectForm}{/block}
+</div>
+{/block}

@@ -1,0 +1,17 @@
+log/*
+temp/*
+vendor/*
+node_modules/*
+bower_components/*
+www/adminwww/lib/vendor/*
+www/webtemp/*
+www/cache/*
+www/adminer/.htaccess
+!vendor/others
+
+.DS_Store
+composer.lock
+app/config/config.local.neon
+
+!.gitignore
+nbproject/*

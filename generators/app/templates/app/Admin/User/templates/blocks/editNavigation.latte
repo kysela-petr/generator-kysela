@@ -1,0 +1,10 @@
+{extends ../../../templates/blocks/editNavigation.latte}
+
+{define #editNavigation}
+	{if $id}
+		{var $items = ['edit' => 'Role', 'settings' => 'Nastavení zdrojů a akcí']}
+	{else}
+		{var $items = ['add' => 'Role']}
+	{/if}
+	{include #parent entityId => $id, items => $items}
+{/define}

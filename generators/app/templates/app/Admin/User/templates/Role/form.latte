@@ -1,0 +1,16 @@
+{extends '../../../templates/@layout.latte'}
+
+{block #content}
+	{includeblock ../blocks/editNavigation.latte current => $current}
+	<div class="widget-box">
+		<div class="widget-title">
+			<span class="icon">
+				<i class="fa fa-tasks"></i>
+			</span>
+			<h5 n:ifset="$roleName">{$roleName}</h5>
+		</div>
+
+		{include #editNavigation}
+		{include #form}
+	</div>
+{/block}

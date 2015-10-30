@@ -1,0 +1,77 @@
+{define classLabel}
+	{default $container = 'base'}
+	{var $vars = func_get_args()[1]}
+	{var $name = $vars[0]}
+	{var $class = $vars[1]}
+	{? if(is_string($container)){$container = $form[$container];} }
+	{var $control = $container[$name]}
+	{var $label = $container[$name]->getLabelPrototype()}
+	{label $container[$name] class => $label->class . $class /}
+{/define}
+
+{define description}
+	{default $description = $control->getOption('description')}
+	{if $description instanceof \Nette\Utils\Html}
+		{$description|noescape}
+	{else}
+		<p class="help-block" n:if="$description">{_$description}</p>
+	{/if}
+{/define}
+
+{define wrapInput}
+	{default $container = 'base'}
+	{var $vars = func_get_args()[1]}
+	{var $name = $vars[0]}
+	{var $class = $vars[1]}
+	{? if(is_string($container)){$container = $form[$container];} }
+	{var $control = $container[$name]}
+	<div class="{$class}">
+		{input $control}
+		{include #description}
+	</div>
+{/define}
+
+{define input}
+	{var $vars = func_get_args()[1]}
+	{var $name = $vars[0]}
+	{var $labelClass = $vars[1]}
+	{var $divClass = $vars[2]}
+	{include #classLabel $name, $labelClass}
+	{include #wrapInput $name, $divClass}
+{/define}
+
+{define checkbox}
+	{default $container = 'base'}
+	{var $vars = func_get_args()[1]}
+	{var $name = $vars[0]}
+	{var $divClass = isset($vars[1]) ? $vars[1] : "col-sm-1"}
+	{? if(is_string($container)){$container = $form[$container];} }
+	{var $control = $container[$name]}
+	<div class="{$divClass}">
+		{$control->getControlPart()->class('competition-checkbox')}
+		<label n:name="$control" class="control-label checkbox">
+			{$control->caption}
+		</label>
+		{include #description}
+	</div>
+{/define}
+
+{define checkboxes}
+	{var $vars = func_get_args()[1]}
+	{var $names = $vars[0]}
+	{foreach $names as $name}
+		{include #checkbox $name, "col-sm-1 col-sm-offset-1"}
+	{/foreach}
+{/define}
+
+{define buttons}
+	{$form->renderer->renderPairMulti(iterator_to_array($form->getComponents(true, '\Nette\Forms\Controls\Button')))|noescape}
+{/define}
+
+{define #hiddens}
+	{foreach $form->getComponents(true, '\Nette\Forms\Controls\HiddenField') as $hidden}
+		{if !$hidden->getOption('rendered')}
+			{input $hidden}
+		{/if}
+	{/foreach}
+{/define}

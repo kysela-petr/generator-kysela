@@ -1,0 +1,20 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+	manager: <%= manager %>
+
+	designer: <%= designer %>
+
+	backend developer: <%= backend %>
+    
+    frontend developer: <%= frontend %>
+
+# THANKS
+
+    eSports -- www.esportsmedia.cz
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5, Nette

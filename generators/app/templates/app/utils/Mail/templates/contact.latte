@@ -1,0 +1,8 @@
+{extends './@email.latte'}
+
+{block #content}
+Jméno: {$data->name}<br/>
+E-mail: {$data->email}<br/><br/>
+Zpráva:<br/>
+{$data->text|escape|nl2br|noescape}
+{/block}

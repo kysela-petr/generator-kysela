@@ -1,0 +1,93 @@
+
+# Model services configuration file
+# create new (bash): "php utils/model.php GameCategory"
+
+services:
+	- Model\Authorizator
+
+	-
+		class: Model\UserRepository('user')
+		setup:
+			- registerMN('role','user_has_role')
+			- registerMN('section','user_has_section')
+	- Model\UserService
+	- Model\UserFilter(@Model\UserRepository::getTableName())
+	- Model\UserFacade
+	- Model\UserProvider
+
+	- Model\RoleRepository('role')
+	- Model\RoleService
+	- Model\RoleFilter(@Model\RoleRepository::getTableName())
+	- Model\RoleFacade
+
+	- Model\RoleResourceRepository('role_resource')
+	- Model\RoleResourceService
+	- Model\RoleResourceFilter(@Model\RoleResourceRepository::getTableName())
+	- Model\RoleResourceFacade
+
+	- Model\RoleActionRepository('role_action')
+	- Model\RoleActionService
+	- Model\RoleActionFilter(@Model\RoleActionRepository::getTableName())
+	- Model\RoleActionFacade
+
+	- Model\RoleHasResourceRepository('role_has_resource')
+	- Model\RoleHasResourceService
+
+	- Model\TokenRepository('token')
+	- Model\TokenService
+	- Model\TokenFilter(@Model\TokenRepository::getTableName())
+	- Model\TokenFacade
+	- Model\TokenProvider
+
+	-
+		class: Model\SectionRepository('section')
+		setup:
+			- registerMN('menuType', 'section_has_menu_type')
+	- Model\SectionService
+	- Model\SectionFilter(@Model\SectionRepository::getTableName())
+	- Model\SectionFacade
+	- Model\SectionProvider
+
+	-
+		class: Model\MenuRepository('menu')
+		setup:
+			- register1N('menu', 'menu_has_menu')
+			- register1N('section', 'menu_has_section')
+			- register1N('submodule', 'menu_has_submodule')
+			- register1N('presenter', 'menu_has_presenter')
+			- register1N('page', 'menu_has_page')
+			- register1N('symlink', 'menu_has_symlink')
+			- register1N('subject', 'menu_has_subject')
+	- Model\MenuService
+	- Model\MenuFilter(@Model\MenuRepository::getTableName())
+	- Model\MenuFacade
+	- Model\MenuProvider
+
+	- Model\ModuleRepository('module')
+	- Model\ModuleService
+	- Model\ModuleFilter(@Model\ModuleRepository::getTableName())
+	- Model\ModuleFacade
+
+	- Model\MenuTypeRepository('menu_type')
+	- Model\MenuTypeService
+	- Model\MenuTypeFilter(@Model\MenuTypeRepository::getTableName())
+	- Model\MenuTypeFacade
+
+	- Model\SubmoduleRepository('submodule')
+	- Model\SubmoduleService
+	- Model\SubmoduleFilter(@Model\SubmoduleRepository::getTableName())
+	- Model\SubmoduleFacade
+
+	- Model\PresenterRepository('presenter')
+	- Model\PresenterService
+	- Model\PresenterFilter(@Model\PresenterRepository::getTableName())
+	- Model\PresenterFacade
+
+	-
+		class: Model\PageRepository('page')
+		setup:
+			- registerMN('section','page_has_section')
+	- Model\PageService
+	- Model\PageFilter(@Model\PageRepository::getTableName(), @Model\SectionRepository::getTableName())
+	- Model\PageFacade
+	- Model\PageProvider

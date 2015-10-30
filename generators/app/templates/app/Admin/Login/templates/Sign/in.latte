@@ -1,0 +1,38 @@
+{extends false}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Author" content="eSports s.r.o." />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="-1" />
+		<meta name="resource-type" content="document" />
+		<meta name="rating" content="general" />
+		<meta name="distribution" content="global" />
+		<meta name="robots" content="{$robots}" n:ifset="$robots">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title>{_'Přihlášení uživatele'} - Admin Krajské weby ČSLH</title>
+		<link rel="shortcut icon" href="/favicon.png">
+		<script>document.documentElement.className += ' js';</script>
+		{control cssAdmin
+			'adminwww/css/bootstrap.min.css',
+			'adminwww/css/font-awesome.min.css',
+			'adminwww/css/unicorn-login.css'
+		}
+		<!--[if lt IE 9]>
+			<script type="text/javascript" src="adminwww/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="container">
+			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}<a href="#" data-dismiss="alert" class="close">×</a></div>
+			{control signForm}
+		</div>
+		{control jsAdmin
+			'adminwww/js/login/js.min.js',
+			'adminwww/js/shame.js'
+		}
+	</body>
+</html>

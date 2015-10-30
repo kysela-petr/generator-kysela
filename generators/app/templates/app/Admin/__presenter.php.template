@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * TOTO JE UKAZKOVA SABLONA PRO PRESENTER
+ * 1. Zkontroluj namespace a dopln autora.
+ * 2. Nahrad XXX za 'Nazev' a xxx za 'nazev'.
+ * 3. Pridej novou polozku do menu: app/Admin/components/MainMenu/MainMenu.php
+ * 4. Pridej bakery do: app/config/parameters.neon
+ * 5. Odstran tento a vytvor vlastni komentar.
+ * 5. Sablonu klidne dopln nebo oprav.
+ */
+
+namespace Admin\Statistics;
+
+use Admin\DataFormPresenter;
+
+/**
+ * @author Generator
+ */
+class XXXPresenter extends DataFormPresenter {
+
+	function __construct(IXXXGridFactory $xxxGridFactory, IXXXFormFactory $xxxFormFactory) {
+		parent::__construct();
+		$this->gridFactory = $xxxGridFactory;
+		$this->formFactory = $xxxFormFactory;
+	}
+
+	public function renderDefault() {
+		$this->simpleList('Nová položka');
+	}
+
+}

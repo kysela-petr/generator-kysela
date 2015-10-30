@@ -1,0 +1,22 @@
+{includeblock 'blocks.latte'}
+
+{*
+    Filtr sekcí
+    Button pro add new
+    Grid
+*}
+{define #sectionNewGrid}
+    {control sectionFilter}
+    {include #newItemBlock}
+    {control grid}
+{/define}
+
+
+{*
+    Filtr sekcí
+    Form
+*}
+{define #sectionForm}
+    {control sectionFilter}
+    {control form}
+{/define}

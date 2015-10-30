@@ -1,0 +1,6 @@
+parameters:
+	db:
+		host: <%= host %>
+		name: <%= name %>
+		user: <%= user %>
+		password: <%= password %>

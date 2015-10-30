@@ -1,0 +1,363 @@
+{*
+	@param string $labelNew Nazev tlacitka "vytvorit novy zaznam"
+*}
+{define #newItemBlock}
+<div class="widget-box">
+	<div class="widget-title">
+		<span n:ifset="$widgetIcon" class="icon">
+			<i class="fa {$widgetIcon}"></i>
+		</span>
+		<h5 n:ifset="$widgetTitle">{$widgetTitle|translate}</h5>
+	</div>
+	<div class="widget-content">
+		<h5><a href="{plink add}" class="btn btn-dark-green btn-sm"><i class="fa fa-plus"></i>&nbsp; {$labelNew|translate}</a></h5>
+	</div>
+</div>
+{/define}
+
+{*
+    @params Nette\Application\UI\Form $form
+*}
+{define hiddens}
+    {var $vars = func_get_args()[1]}
+    {var $form = $vars[0]}
+	{foreach $form->getComponents(true, '\Nette\Forms\Controls\HiddenField') as $hidden}
+		{if !$hidden->getOption('rendered')}
+			{input $hidden}
+		{/if}
+	{/foreach}
+{/define}
+
+{*
+    @param \Nette\Forms\Controls\TextBase $input
+*}
+{define input}
+	{var $vars = func_get_args()[1]}
+    {var $input = $vars[0]}
+    {if $input instanceof \Vodacek\Forms\Controls\DateInput }
+        {input $input class=> "form-control {$input->getControl()->class}"}
+    {elseif $input instanceof \Esports\Forms\Select2Input || $input instanceof \Esports\Forms\Multiselect2Input || $input instanceof \Esports\Forms\TagsInput || $input instanceof \Nette\Forms\Controls\MultiSelectBox}
+        {input $input}
+    {elseif $input instanceof Nette\Forms\Controls\UploadControl}
+        {input $input class=> "{$input->getControl()->class}"}
+    {else}
+        {input $input class=> "form-control {$input->getControl()->class}"}
+    {/if}
+    {if $input->getOption('description')}
+        <span n:if="strlen($input->getOption('description'))>0" class="help-block">{$input->getOption('description')}</span>
+    {/if}
+{/define}
+
+
+{*
+    @param \Nette\Forms\Controls\TextBase $input
+    @param string Input wrapper class => 'col-sm-9'
+*}
+{define wrapInput}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $inputWrapColClass = isset($vars[1]) ? $vars[1] : 'col-sm-9'}
+    <div class="{$inputWrapColClass}">
+        {include input $input}
+    </div>
+{/define}
+
+
+{*
+	@param \Nette\Forms\Controls\TextBase $input
+	@param string Label class => 'col-sm-3'
+	@param string Input wrapper class => 'col-sm-9'
+*}
+{define formGroup}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $labelColClass = isset($vars[1]) ? $vars[1] : 'col-sm-3'}
+	{var $inputWrapColClass = isset($vars[2]) ? $vars[2] : 'col-sm-9'}
+	{var $required = $input->isRequired() ? 'required' : ''}
+	<div class="form-group">
+		{label $input, class => "control-label $labelColClass $required"/}
+        {include wrapInput $input, $inputWrapColClass}
+	</div>
+{/define}
+
+{*
+	@param \Nette\Forms\Controls\TextBase $input
+	@param bool TRUE=> show button for "Select all" in closest form-group > select.select2
+*}
+{define inlineFormGroup}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	<div class="form-group">
+		{label $input, class => ($input->isRequired() ? 'required' : '') /}
+        {include input $input}
+	</div>
+{/define}
+
+{*
+    Šaplona pro uploadovací tlačítko inline
+	@param \Nette\Forms\Controls\TextBase $input
+*}
+{define uploadInlineFormGroup}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $icon = isset($vars[1]) ? $vars[1] : 'image'}
+	<div class="form-group">
+        {label $input class => "btn btn-default"}
+            {include wrapInput $input, 'hide upload-file'}
+            <i class="glyphicon glyphicon-image fa fa-{$icon}">&nbsp;{$input->caption}</i>
+        {/label}
+        <span class="upload-file-name"></span>
+	</div>
+{/define}
+
+
+{*
+    Šablona pro uploadovací tlačítko
+	@param \Nette\Forms\Controls\TextBase $input
+*}
+{define uploadFormGroup}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $labelColClass = isset($vars[1]) ? $vars[1] : 'col-sm-3'}
+	{var $inputWrapColClass = isset($vars[2]) ? $vars[2] : 'col-sm-9'}
+	{var $icon = isset($vars[3]) ? $vars[3] : 'image'}
+	<div class="form-group">
+	    {label $input class => "control-label $labelColClass"/}
+        <div class="{$inputWrapColClass}">
+            {label $input class => "btn btn-default"}
+                {include wrapInput $input, 'hide upload-file'}
+                <i class="glyphicon glyphicon-image fa fa-{$icon}">&nbsp;{_"Vybrat soubor"}</i>
+            {/label}
+            <span class="upload-file-name"></span>
+        </div>
+            {if $input->getOption('description')}
+                <span n:if="strlen($input->getOption('description'))>0" class="help-block">{$input->getOption('description')}</span>
+            {/if}
+	</div>
+{/define}
+
+
+{*
+	@param \Nette\Forms\Controls\TextBase $input
+	@param string Label class => 'col-sm-3'
+	@param string Input wrapper class => 'col-sm-9'
+*}
+{define labelInputPair}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $labelColClass = isset($vars[1]) ? $vars[1] : 'col-sm-3'}
+	{var $inputWrapColClass = isset($vars[2]) ? $vars[2] : 'col-sm-9'}
+	{var $requiredClass = $input->isRequired() ? 'required' : ''}
+    {label $input  class => "control-label $labelColClass $requiredClass"/}
+    {include wrapInput $input, $inputWrapColClass}
+{/define}
+
+
+{*
+	@param \Nette\Forms\Controls\Checkbox $input
+	@param string Label class => 'col-sm-2'
+	@param string Input wrapper class => 'col-sm-9'
+*}
+{define checkboxGroup}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	{var $labelColClass = isset($vars[1]) ? $vars[1] : 'col-sm-3'}
+	{var $inputWrapColClass = isset($vars[2]) ? $vars[2] : 'col-sm-9'}
+	<div class="form-group">
+        <div class="control-label {$labelColClass}">
+            <label n:name="$input">
+                {$template->translate($input->caption)}
+            </label>
+        </div>
+        <div class="{$inputWrapColClass}">
+            <label n:name="$input" class="checkbox">
+                {$input->getControlPart()->class('competition-checkbox')}
+            </label>
+        </div>
+	</div>
+{/define}
+
+{define inlineCheckbox}
+	{var $vars = func_get_args()[1]}
+	{var $input = $vars[0]}
+	<div class="checkbox">
+		{label $input /}
+		{include input $input}
+	</div>
+{/define}
+
+{*
+    @params $photoData
+	@param string Img wrapper class => 'col-sm-offset-2 col-sm-9'
+	@param string Template Filter name absolute path 'photoPath'
+	@param string Template Filter name url path 'photoUrl'
+	@param string Zoomable? => TRUE
+*}
+{define photoGroup}
+    {var $vars = func_get_args()[1]}
+    {var $photoData = $vars[0]}
+    {var $imageWrapColClass = isset($vars[1]) ? $vars[1] : 'col-sm-offset-2 col-sm-9'}
+    {var $pathFu = isset($vars[2]) ? $vars[2] : 'photoPath'}
+    {var $urlFu = isset($vars[3]) ? $vars[3] : 'photoUrl'}
+    {var $zoomable = isset($vars[4]) ? $vars[4] : TRUE}
+    {var $dirPhotoPath = $template->$pathFu($photoData->path)}
+    {var $dataText = ''}
+    {if isset($photoData->name) && isset($photoData->folderName)}
+        {var $dataText = $photoData->name . '/' . $photoData->folderName}
+    {/if}
+    {? list($width, $height) = is_file($dirPhotoPath) ? getimagesize($dirPhotoPath) : array(0,0)}
+    <div class="form-group">
+        <div class="{$imageWrapColClass}">
+          <img src="{$template->$urlFu($photoData->thumbnail_path)}" data-text="{$dataText}" data-big="{$template->$urlFu($photoData->path)}" data-size="{$width} x {$height}" n:class="$zoomable ? zoomable"/>
+        </div>
+    </div>
+{/define}
+
+{*
+    @params Nette\Application\UI\Form $form
+    @params string Button wrapper class => 'col-md-12'
+    @params bool fieldset tag Z
+*}
+{define buttons}
+    {var $vars = func_get_args()[1]}
+    {var $form = $vars[0]}
+    {var $buttonWrapperClass = isset($vars[1]) ? $vars[1] : 'col-md-12'}
+    {var $nIf = isset($vars[2]) ? (bool)$vars[2] : TRUE}
+    <fieldset n:tag-if="$nIf" class="{$buttonWrapperClass}">
+        {$form->renderer->classButtons($form->getComponents(true, '\Nette\Forms\Controls\Button'))}
+        {$form->renderer->renderPairMulti(iterator_to_array($form->getComponents(true, '\Nette\Forms\Controls\Button')))|noescape}
+     </fieldset>
+{/define}
+
+
+
+{*
+    @params array $gallery photo data
+*}
+{define gallery}
+    {var $vars = func_get_args()[1]}
+    {var $gallery = $vars[0]}
+    {foreach $gallery as $gitem}
+        {? $filePath = $template->photoPath($gitem->path)}
+        {continueIf !is_file($filePath)}
+        <div style="float: left; padding: 4px;">
+            {var $dataText = ''}
+            {if isset($photoData->name) && isset($photoData->folderName)}
+                {var $dataText = $gitem->name . '/' . $gitem->folderName}
+            {/if}
+            {? list($width, $height) = @getimagesize($filePath)}
+            <div style="width: 40px; height: 40px; position: relative;">
+                <img src="/min.php?file={$template->photoUrl($gitem->thumbnail_path)}&w=40&h=40" title="{$gitem->desc}" data-big="{$template->photoUrl($gitem->path)}" data-size="{$width} x {$height}" data-text="{$dataText}" class="zoomable" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;" />
+            </div>
+        </div>
+    {/foreach}
+{/define}
+
+
+{*
+    Šablona otevření modal okna pro vložení nebo hledání fotky
+    @params string Button wrapper class => 'col-sm-offset-2  col-sm-9'
+    @params string Upload button htmlID => 'photoId'
+    @params string Upload image base64string target htmlID => 'imageString'
+    @params string Upload image name target htmlID => 'imageName'
+*}
+{define modalImageFormGroup}
+	{var $vars = func_get_args()[1]}
+	{var $inputWrapColClass = isset($vars[0]) ? $vars[0] : 'col-sm-offset-2  col-sm-9'}
+	{var $photo = isset($vars[1]) ? $vars[1] : 'mainPhotoHidden'}
+	{var $thumbnail = isset($vars[2]) ? $vars[2] : 'mainPhotoImg'}
+	{var $label = isset($vars[3]) ? $vars[3] : NULL}
+	{var $labelColClass = isset($vars[4]) ? $vars[4] : NULL}
+	{var $photoRecommended = isset($vars[5]) ? $vars[5] : NULL}
+	<div class="form-group">
+        <div n:if="$label" class="control-label {$labelColClass}">
+            <label>
+                {$template->translate($label)}
+            </label>
+        </div>
+        <div class="{$inputWrapColClass}">
+            <button type="button" class="btn btn-default modalButton"
+                data-toggle="modal"
+                data-target="#photoUploadModal"
+                data-upload="photoId"
+                data-image="imageString"
+                data-name="imageName"
+                data-photo-hidden="{$photo}"
+                data-thumbnail="{$thumbnail}">
+             <i class="glyphicon glyphicon-image fa fa-image">&nbsp;{_"Vložit fotografii"}</i>
+            </button>
+            <button type="button" class="btn btn-default"
+                data-toggle="modal"
+                data-target="#photo-picker-wrapper"
+                data-photo-hidden="{$photo}"
+                data-thumbnail="{$thumbnail}">
+             <i class="glyphicon glyphicon-image fa fa-search">&nbsp;{_"Hledat fotografii"}</i>
+            </button>
+            {var $recommendedSize = $template->translate('Doporučená velikost fotografie:') . $photoRecommended}
+             <span n:if="strlen($photoRecommended)>0" class="help-block">{$recommendedSize}</span>
+        </div>
+
+	</div>
+{/define}
+
+
+{*
+    Šablona pro photoPicker fotku
+    @params $photoData
+	@param string Img wrapper class => 'col-sm-offset-2 col-sm-9'
+	@param string Template Filter name absolute path 'photoPath'
+	@param string Template Filter name url path 'photoUrl'
+	@param string Zoomable? => TRUE
+*}
+{define mainPhotoGroup}
+    {var $vars = func_get_args()[1]}
+    {var $photoData = $vars[0]}
+    {var $imageWrapColClass = isset($vars[1]) ? $vars[1] : 'col-sm-offset-2 col-sm-9'}
+    {var $pathFu = isset($vars[2]) ? $vars[2] : 'photoPath'}
+    {var $urlFu = isset($vars[3]) ? $vars[3] : 'photoUrl'}
+    {var $zoomable = isset($vars[4]) ? $vars[4] : TRUE}
+    {var $thumbnail = isset($vars[5]) ? $vars[5] : 'mainPhotoImg'}
+    {var $dataText = ''}
+    {var $dataSize = ''}
+    {var $src = ''}
+    {var $dataBig = ''}
+    {var $wrapper = 'none'}
+    {if $photoData !== FALSE}
+        {var $dirPhotoPath = $template->$pathFu($photoData->path)}
+        {var $src = $template->$urlFu($photoData->thumbnail_path)}
+        {var $dataBig = $template->$urlFu($photoData->path)}
+        {if isset($photoData->name) && isset($photoData->folderName)}
+            {var $dataText = $photoData->name . '/' . $photoData->folderName}
+        {/if}
+        {? list($width, $height) = file_exists($dirPhotoPath) ? @getimagesize($dirPhotoPath) : array(0,0)}
+        {var $dataSize = $width .' x '. $height}
+        {var $wrapper = is_file($dirPhotoPath) ? 'block' : 'none'}
+    {/if}
+    <div class="form-group" style="display: {$wrapper}">
+        <div class="{$imageWrapColClass}">
+          <img id="{$thumbnail}" src="{$src}" data-text="{$dataText}" data-big="{$dataBig}" data-size="{$dataSize}" n:class="$zoomable ? zoomable"/>
+        </div>
+    </div>
+{/define}
+
+{*
+ * string $name
+ * array $args
+ * Container|null $container
+ * string|null $containerName
+ * array|null $args
+ * string|null $class
+ * string|null $type
+ *}
+{define #replacebleInput}
+	{default $args = []}
+	{default $type = 'text'}
+	{if isset($class)}
+		{var $args['class'] = $class}
+	{/if}
+	{if isset($container)}
+		{input $container[$name] (expand)$args}
+	{else}
+		<REPLACEINPUT name="{$containerName}[REPLACEID][{$name}]" type="{$type}" {foreach $args as $key => $val}{$key|noescape}={$val} {/foreach} />
+	{/if}
+{/define}

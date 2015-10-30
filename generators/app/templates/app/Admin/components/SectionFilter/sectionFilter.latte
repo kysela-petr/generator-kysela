@@ -1,0 +1,5 @@
+<ul class="nav nav-pills">
+	{foreach $sections as $id => $name}
+	<li role="presentation" n:class="$id == $sectionId ? active"><a n:href="setFilter! $id">{$name}</a></li>
+	{/foreach}
+</ul>
